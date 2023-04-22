@@ -1,6 +1,5 @@
 import {inject} from '@loopback/core';
 
-
 import {
   Request,
   RestBindings,

@@ -10,7 +10,9 @@ jobs:
         with:
           node-version: "20"
       - name: Installing and running prettier
-        run: npm run prettier:check
+        run: |
+          npm install
+          npm run prettier:check
 
   run-eslint-backend:
     runs-on: ubuntu-latest

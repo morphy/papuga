@@ -1,9 +1,9 @@
-import {PapugaBackendApplication} from '../..';
+import { BackendApplication } from "../..";
 import {
   createRestAppClient,
   givenHttpServerConfig,
-  Client,
-} from '@loopback/testlab';
+  Client
+} from "@loopback/testlab";
 
 export async function setupApplication(): Promise<AppWithClient> {
   const restConfig = givenHttpServerConfig({
@@ -14,8 +14,8 @@ export async function setupApplication(): Promise<AppWithClient> {
     // port: +process.env.PORT,
   });
 
-  const app = new PapugaBackendApplication({
-    rest: restConfig,
+  const app = new BackendApplication({
+    rest: restConfig
   });
 
   await app.boot();
@@ -23,10 +23,10 @@ export async function setupApplication(): Promise<AppWithClient> {
 
   const client = createRestAppClient(app);
 
-  return {app, client};
+  return { app, client };
 }
 
 export interface AppWithClient {
-  app: PapugaBackendApplication;
+  app: BackendApplication;
   client: Client;
 }

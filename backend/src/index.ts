@@ -1,9 +1,9 @@
-import {ApplicationConfig, PapugaBackendApplication} from './application';
+import { ApplicationConfig, BackendApplication } from "./application";
 
-export * from './application';
+export * from "./application";
 
 export async function main(options: ApplicationConfig = {}) {
-  const app = new PapugaBackendApplication(options);
+  const app = new BackendApplication(options);
   await app.boot();
   await app.start();
 
@@ -28,12 +28,12 @@ if (require.main === module) {
       gracePeriodForClose: 5000, // 5 seconds
       openApiSpec: {
         // useful when used with OpenAPI-to-GraphQL to locate your application
-        setServersFromRequest: true,
-      },
-    },
+        setServersFromRequest: true
+      }
+    }
   };
-  main(config).catch(err => {
-    console.error('Cannot start the application.', err);
+  main(config).catch((err) => {
+    console.error("Cannot start the application.", err);
     process.exit(1);
   });
 }

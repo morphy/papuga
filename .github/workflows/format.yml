@@ -1,13 +1,35 @@
-name: format
-run-name: ${{ github.actor }} is checking files format
+name: lint
+run-name: ${{ github.actor }} is running Prettier and ESLint
 on: [push]
 jobs:
-  check-formatting:
+  run-prettier:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: "14"
+          node-version: "20"
       - run: npm install
       - run: npm run prettier:check
+
+  run-eslint-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+      - run: cd backend
+      - run: npm install
+      - run: npm run eslint
+
+  run-eslint-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+      - run: cd frontend
+      - run: npm install
+      - run: npm run eslint

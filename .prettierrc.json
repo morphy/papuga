@@ -1,6 +1,3 @@
 {
-  "tabWidth": 2,
-  "useTabs": false,
-  "trailingComma": "none",
-  "endOfLine": "crlf"
+  "trailingComma": "none"
 }

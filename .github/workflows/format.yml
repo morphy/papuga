@@ -9,8 +9,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "20"
-      - run: npm install
-      - run: npm run prettier:check
+      - name: Installing and running prettier
+        run: npm run prettier:check
 
   run-eslint-backend:
     runs-on: ubuntu-latest
@@ -19,9 +19,11 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "20"
-      - run: cd backend
-      - run: npm install
-      - run: npm run eslint
+      - name: Installing and running eslint on /backend
+        run: |
+          cd backend
+          npm install
+          npm run eslint
 
   run-eslint-frontend:
     runs-on: ubuntu-latest
@@ -30,6 +32,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "20"
-      - run: cd frontend
-      - run: npm install
-      - run: npm run eslint
+      - name: Installing and running eslint on /frontend
+        run: |
+          cd frontend
+          npm install
+          npm run eslint

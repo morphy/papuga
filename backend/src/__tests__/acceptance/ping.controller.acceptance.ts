@@ -1,9 +1,9 @@
 import { Client, expect } from "@loopback/testlab";
-import { BackendApplication } from "../..";
+import { PapugaBackendApplication } from "../..";
 import { setupApplication } from "./test-helper";
 
 describe("PingController", () => {
-  let app: BackendApplication;
+  let app: PapugaBackendApplication;
   let client: Client;
 
   before("setupApplication", async () => {

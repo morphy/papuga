@@ -1,16 +1,6 @@
 import Head from "next/head";
 
 export default function Home() {
-  const handleClick = () => {
-    fetch("http://localhost:4000/ping", {
-      headers: {
-        accept: "application/json"
-      }
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data));
-  };
-
   return (
     <>
       <Head>
@@ -19,7 +9,6 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <button onClick={handleClick}>Test /ping</button>
     </>
   );
 }

@@ -12,7 +12,7 @@ import { MySequence } from "./sequence";
 
 export { ApplicationConfig };
 
-export class BackendApplication extends BootMixin(
+export class PapugaBackendApplication extends BootMixin(
   ServiceMixin(RepositoryMixin(RestApplication))
 ) {
   constructor(options: ApplicationConfig = {}) {

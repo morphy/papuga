@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Storage and resource management app for POO PCK Gdańsk",
   "license": "GPL-3.0-only",
+  "private": true,
   "contributors": [
     {
       "name": "morphy",
@@ -11,13 +12,19 @@
   ],
   "scripts": {
     "prettier": "npx prettier --check ./",
-    "prettier:fix": "npx prettier --write ./"
+    "prettier:fix": "npx prettier --write ./",
+    "clean": "rimraf --glob \"packages/**/dist\" \"packages/**/*.tsbuildinfo\"",
+    "build": "tsc --build --force"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/morphy/papuga.git"
   },
   "dependencies": {
-    "prettier": "^2.8.7"
-  }
+    "prettier": "^2.8.7",
+    "rimraf": "^5.0.1"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
 }

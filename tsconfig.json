@@ -2,10 +2,10 @@
   "files": [],
   "references": [
     {
-      "path": "packages/auth"
+      "path": "modules/utils"
     },
     {
-      "path": "packages/utils"
+      "path": "modules/papuga-backend"
     }
   ]
 }

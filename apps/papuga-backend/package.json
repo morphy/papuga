@@ -1,0 +1,20 @@
+{
+  "name": "@pck/papuga-backend",
+  "version": "0.0.1",
+  "description": "Papuga backend package",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "nodemon src/index.ts"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "nodemon": "^3.0.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.3.2"
+  },
+  "dependencies": {
+    "cors": "^2.8.5"
+  }
+}

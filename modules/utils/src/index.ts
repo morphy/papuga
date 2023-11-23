@@ -11,3 +11,7 @@ export const getEnv = (name: string): string => {
 
   return process.env[name] as string;
 };
+
+export const isProduction = (): boolean => {
+  return process.env["NODE_ENV"] === "production";
+};

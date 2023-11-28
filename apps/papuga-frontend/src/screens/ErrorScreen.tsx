@@ -1,7 +1,7 @@
 import React from "react";
 
-const ErrorPage = () => {
+const ErrorScreen = () => {
   return <div>ajajaj 404</div>;
 };
 
-export default ErrorPage;
+export default ErrorScreen;

@@ -1,44 +1,44 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import ErrorPage from "./pages/ErrorPage";
+import ErrorScreen from "./screens/ErrorScreen";
 import Layout from "./components/Layout";
-import HomePage from "./pages/HomePage";
-import ItemsPage from "./pages/ItemsPage";
-import SetsPage from "./pages/SetsPage";
-import CarsPage from "./pages/CarsPage";
-import InspectionsPage from "./pages/InspectionsPage";
-import RentalsPage from "./pages/RentalsPage";
+import HomeScreen from "./screens/HomeScreen";
+import ItemsScreen from "./screens/ItemsScreen";
+import SetsScreen from "./screens/SetsScreen";
+import CarsScreen from "./screens/CarsScreen";
+import InspectionsScreen from "./screens/InspectionsScreen";
+import RentalsScreen from "./screens/RentalsScreen";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
-    errorElement: <ErrorPage />,
+    errorElement: <ErrorScreen />,
     children: [
       {
         path: "home",
-        element: <HomePage />
+        element: <HomeScreen />
       },
       {
         path: "items",
-        element: <ItemsPage />
+        element: <ItemsScreen />
       },
       {
         path: "sets",
-        element: <SetsPage />
+        element: <SetsScreen />
       },
       {
         path: "cars",
-        element: <CarsPage />
+        element: <CarsScreen />
       },
       {
         path: "rentals",
-        element: <RentalsPage />
+        element: <RentalsScreen />
       },
       {
         path: "inspections",
-        element: <InspectionsPage />
+        element: <InspectionsScreen />
       }
     ]
   }

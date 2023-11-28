@@ -1,8 +1,28 @@
 {
   "extends": "../../tsconfig.common.json",
   "compilerOptions": {
-    "rootDir": "src",
-    "outDir": "dist"
+    "outDir": "dist",
+    "baseUrl": "./src",
+    "rootDir": "./src",
+
+    "plugins": [{ "transform": "typescript-transform-paths" }],
+
+    "paths": {
+      "controllers/*": ["controllers/*"],
+      "models/*": ["models/*"],
+      "routes/*": ["routes/*"],
+      "schemas/*": ["schemas/*"],
+      "services/*": ["services/*"]
+    },
+    "experimentalDecorators": true
   },
+  "references": [
+    {
+      "path": "../../modules/utils"
+    },
+    {
+      "path": "../../types/papuga-types"
+    }
+  ],
   "include": ["src/**/*"]
 }

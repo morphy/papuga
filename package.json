@@ -13,7 +13,8 @@
   "scripts": {
     "prettier": "npx prettier --check ./",
     "prettier:fix": "npx prettier --write ./",
-    "clean": "rimraf --glob \\\\\\\"modules/**/dist\\\\\\\" \\\\\\\"packages/**/*.tsbuildinfo\\\\\\\"",
+    "clean": "rimraf --glob \"modules/**/dist\" \"modules/**/*.tsbuildinfo\" \"apps/**/dist\" \"apps/**/*.tsbuildinfo\"",
+    "clean:all": "npm run clean && rimraf --glob \"**/node_modules\"",
     "build": "tsc --build --force"
   },
   "repository": {
@@ -26,6 +27,7 @@
   },
   "workspaces": [
     "apps/*",
-    "modules/*"
+    "modules/*",
+    "types/*"
   ]
 }

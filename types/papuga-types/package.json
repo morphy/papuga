@@ -1,13 +1,10 @@
 {
-  "name": "@pck/utils",
+  "name": "@pck/papuga-types",
   "version": "0.0.1",
-  "description": "Helper functions package",
+  "description": "Types for papuga",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc --build"
-  },
-  "dependencies": {
-    "chalk": "^4.1.2"
   }
 }

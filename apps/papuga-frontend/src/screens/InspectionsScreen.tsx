@@ -1,7 +1,7 @@
 import React from "react";
 
-const InspectionsPage = () => {
+const InspectionsScreen = () => {
   return <div>przeglądy suko</div>;
 };
 
-export default InspectionsPage;
+export default InspectionsScreen;

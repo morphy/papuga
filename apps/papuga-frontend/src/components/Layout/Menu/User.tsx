@@ -2,7 +2,9 @@ import React, { useMemo } from "react";
 import { minidenticon } from "minidenticons";
 
 import Stack from "@mui/material/Stack";
-import { Avatar, Typography } from "@mui/material";
+import Avatar from "@mui/material/Avatar";
+import Typography from "@mui/material/Typography";
+import useMinidenticon from "../../../utils/useMinidenticon";
 
 type UserProps = {
   avatar?: string;
@@ -13,12 +15,7 @@ type UserProps = {
 const User: React.FC<UserProps> = (props: UserProps) => {
   const { avatar, name, email } = props;
 
-  const iconSrc = useMemo(
-    () =>
-      "data:image/svg+xml;utf8," +
-      encodeURIComponent(minidenticon(name ?? "", 93, 45)),
-    [name]
-  );
+  const iconSrc = useMinidenticon(name);
 
   return (
     <Stack
@@ -26,9 +23,11 @@ const User: React.FC<UserProps> = (props: UserProps) => {
       sx={{
         display: "flex",
         alignItems: "center",
+        justifyContent: "stretch",
         backgroundColor: "primary.main",
         color: "primary.contrastText",
-        p: 2
+        p: 2,
+        mt: "auto"
       }}
     >
       <Avatar
@@ -41,10 +40,12 @@ const User: React.FC<UserProps> = (props: UserProps) => {
         }}
       />
 
-      <div>
-        <Typography variant="h6">{name}</Typography>
-        <Typography variant="body2">{email}</Typography>
-      </div>
+      <Typography variant="h6" overflow="hidden" textOverflow="ellipsis">
+        {name}
+        <Typography variant="body2" overflow="hidden" textOverflow="ellipsis">
+          {email}
+        </Typography>
+      </Typography>
     </Stack>
   );
 };

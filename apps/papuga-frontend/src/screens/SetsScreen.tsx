@@ -1,7 +1,7 @@
 import React from "react";
 
-const SetsPage = () => {
+const SetsScreen = () => {
   return <div>zestawy</div>;
 };
 
-export default SetsPage;
+export default SetsScreen;

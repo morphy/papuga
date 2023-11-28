@@ -9,11 +9,10 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
-import "./index.css";
+import "styles/index.css";
+import theme from "styles/theme";
 
 import App from "./App";
-
-import theme from "./theme";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

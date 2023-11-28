@@ -2,10 +2,13 @@
   "files": [],
   "references": [
     {
+      "path": "apps/papuga-backend"
+    },
+    {
       "path": "modules/utils"
     },
     {
-      "path": "modules/papuga-backend"
+      "path": "types/papuga-types"
     }
   ]
 }

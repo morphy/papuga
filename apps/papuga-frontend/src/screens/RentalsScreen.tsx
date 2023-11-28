@@ -1,7 +1,7 @@
 import React from "react";
 
-const RentalsPage = () => {
+const RentalsScreen = () => {
   return <div>wypoRZYCZENIA</div>;
 };
 
-export default RentalsPage;
+export default RentalsScreen;

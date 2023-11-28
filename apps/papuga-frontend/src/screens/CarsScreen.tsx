@@ -1,7 +1,7 @@
 import React from "react";
 
-const CarsPage = () => {
+const CarsScreen = () => {
   return <div>brumm</div>;
 };
 
-export default CarsPage;
+export default CarsScreen;

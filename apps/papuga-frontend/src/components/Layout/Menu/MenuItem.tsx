@@ -1,22 +1,28 @@
 import React from "react";
+import { Link, useLocation } from "react-router-dom";
 
 import { styled } from "@mui/material";
 import ButtonBase, { ButtonBaseProps } from "@mui/material/ButtonBase";
-import { Link, useLocation } from "react-router-dom";
 
 const Button = styled(ButtonBase)<ButtonBaseProps>(({ theme }) => ({
   width: "100%",
-  color: "black",
-  borderRadius: "0",
+
+  // flexDirection: "column",
   justifyContent: "flex-start",
-  textTransform: "none",
+
   padding: "1rem 1.5rem",
+  borderRadius: "0",
+
+  color: "black",
+  textTransform: "none",
   fontSize: "1rem",
+
   transitionDuration: "0.1s",
 
   "& .MuiSvgIcon-root": {
     fontSize: "1.5rem",
-    marginRight: "1rem"
+    // marginBottom: theme.spacing(0.5)
+    marginRight: theme.spacing(2)
   },
 
   "&:hover": {

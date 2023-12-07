@@ -1,3 +1,6 @@
 package-lock.json
 
 dist/
+
+apps/papuga-backend/src/tsoa/routes.ts
+apps/papuga-backend/src/tsoa/swagger.json

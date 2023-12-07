@@ -12,10 +12,16 @@ const models: TsoaRoute.Models = {
     "Item": {
         "dataType": "refObject",
         "properties": {
+            "createdAt": {"dataType":"datetime","required":true},
+            "updatedAt": {"dataType":"datetime","required":true},
             "id": {"dataType":"double","required":true},
-            "name": {"dataType":"string","required":true},
             "code": {"dataType":"string","required":true},
-            "image": {"dataType":"string","required":true},
+            "deletedAt": {"dataType":"datetime","required":true},
+            "name": {"dataType":"string"},
+            "value": {"dataType":"double"},
+            "serialNumber": {"dataType":"string"},
+            "productionDate": {"dataType":"datetime"},
+            "expirationDate": {"dataType":"datetime"},
         },
         "additionalProperties": false,
     },
@@ -30,6 +36,30 @@ export function RegisterRoutes(app: Router) {
     //  NOTE: If you do not see routes for all of your controllers in this file, then you might not have informed tsoa of where to look
     //      Please look into the "controllerPathGlobs" config option described in the readme: https://github.com/lukeautry/tsoa
     // ###########################################################################################################
+        app.get('/items',
+            ...(fetchMiddlewares<RequestHandler>(ItemController)),
+            ...(fetchMiddlewares<RequestHandler>(ItemController.prototype.getItems)),
+
+            function ItemController_getItems(request: any, response: any, next: any) {
+            const args = {
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new ItemController();
+
+
+              const promise = controller.getItems.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.get('/items/:id',
             ...(fetchMiddlewares<RequestHandler>(ItemController)),
             ...(fetchMiddlewares<RequestHandler>(ItemController.prototype.getItem)),
@@ -37,7 +67,6 @@ export function RegisterRoutes(app: Router) {
             function ItemController_getItem(request: any, response: any, next: any) {
             const args = {
                     id: {"in":"path","name":"id","required":true,"dataType":"double"},
-                    name: {"in":"query","name":"name","dataType":"string"},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -50,6 +79,31 @@ export function RegisterRoutes(app: Router) {
 
 
               const promise = controller.getItem.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.delete('/items/:id',
+            ...(fetchMiddlewares<RequestHandler>(ItemController)),
+            ...(fetchMiddlewares<RequestHandler>(ItemController.prototype.deleteItem)),
+
+            function ItemController_deleteItem(request: any, response: any, next: any) {
+            const args = {
+                    id: {"in":"path","name":"id","required":true,"dataType":"double"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new ItemController();
+
+
+              const promise = controller.deleteItem.apply(controller, validatedArgs as any);
               promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);

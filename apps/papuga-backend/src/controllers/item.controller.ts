@@ -1,22 +1,23 @@
-import { Controller, Get, Path, Query, Route } from "tsoa";
+import { Controller, Delete, Get, Path, Route } from "tsoa";
 
 import { Item } from "@pck/papuga-types";
 
+import ItemRepository from "repositories/item.repository";
+
 @Route("items")
 export class ItemController extends Controller {
-  @Get("{id}")
-  public async getItem(
-    @Path() id: number,
-    @Query() name?: string
-  ): Promise<Item> {
-    const item = {
-      id: id,
-      name: name || "abc",
-      code: "123",
-      image: "12333123",
-      d: "dd"
-    };
+  @Get()
+  public async getItems(): Promise<Item[]> {
+    return await ItemRepository.find();
+  }
 
-    return item;
+  @Get("{id}")
+  public async getItem(@Path() id: number): Promise<Item | null> {
+    return await ItemRepository.findOne({ where: { id } });
+  }
+
+  @Delete("{id}")
+  public async deleteItem(@Path() id: number) {
+    return await ItemRepository.softDelete(id);
   }
 }

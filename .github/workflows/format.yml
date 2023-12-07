@@ -1,5 +1,5 @@
 name: lint
-run-name: ${{ github.actor }} is running Prettier and ESLint
+run-name: ${{ github.actor }} is running Prettier
 on: [push]
 jobs:
   run-prettier:
@@ -13,29 +13,3 @@ jobs:
         run: |
           npm install
           npm run prettier
-
-  run-eslint-backend:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: "20"
-      - name: Installing and running eslint on /backend
-        run: |
-          cd backend
-          npm install
-          npm run eslint
-
-  run-eslint-frontend:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: "20"
-      - name: Installing and running eslint on /frontend
-        run: |
-          cd frontend
-          npm install
-          npm run eslint

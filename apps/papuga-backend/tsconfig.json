@@ -12,9 +12,12 @@
       "models/*": ["models/*"],
       "routes/*": ["routes/*"],
       "schemas/*": ["schemas/*"],
-      "services/*": ["services/*"]
+      "services/*": ["services/*"],
+      "entities/*": ["entities/*"],
+      "repositories/*": ["repositories/*"]
     },
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   },
   "references": [
     {

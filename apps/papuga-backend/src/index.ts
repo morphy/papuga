@@ -2,18 +2,38 @@ import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 
-import { logInfo } from "@pck/utils";
+import { logError, logInfo, logSuccess } from "@pck/utils";
 
 import { RegisterRoutes } from "./tsoa/routes";
+import { AppDataSource } from "./data-source";
 
-const app = express();
+import errorHandler from "./errorHandler";
+import notFoundHandler from "./notFoundHandler";
 
-app.use(helmet());
-app.use(cors());
-app.use(express.json());
+logInfo("Papuga backend server started");
+logInfo("Initializing datasource");
 
-RegisterRoutes(app);
+AppDataSource.initialize()
+  .then(() => {
+    logInfo("Initializing express");
 
-app.listen(4000, () => {
-  logInfo("Server listening on port 4000");
-});
+    const app = express();
+
+    app.use(helmet());
+    app.use(cors());
+    app.use(express.json());
+
+    logInfo("Registering controllers");
+
+    RegisterRoutes(app);
+
+    app.use(notFoundHandler);
+    app.use(errorHandler);
+
+    app.listen(4000, () => {
+      logSuccess("Server listening on port 4000");
+    });
+  })
+  .catch((error) => {
+    logError("Error during datasource initialization", error);
+  });

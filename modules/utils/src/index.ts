@@ -6,25 +6,29 @@ export const logDetails = (details?: any, prefix: string = "") => {
   }
 };
 
-export const logInfo = (message: string, details?: any) => {
+export const logInfo = (message?: any, ...details: any) => {
   console.log(chalk.blue("[INF]"), chalk.white(message));
 
-  logDetails(details, "  ");
+  for (let i = 0; i < details.length; i++) {
+    logDetails(details[i], "  ");
+  }
 };
 
-export const logSuccess = (message: string, details?: any) => {
+export const logSuccess = (message?: any, details?: any) => {
   console.log(chalk.green("[SCS]"), chalk.white(message));
 
   logDetails(details, "  ");
 };
 
-export const logWarning = (message: string, details?: any) => {
+export const logWarning = (message?: any, ...details: any) => {
   console.log(chalk.yellow("[WRN]"), chalk.white(message));
 
-  logDetails(details, "  ");
+  for (let i = 0; i < details.length; i++) {
+    logDetails(details[i], "  ");
+  }
 };
 
-export const logError = (message: string, details?: any) => {
+export const logError = (message?: any, details?: any) => {
   console.log(chalk.red("[ERR]"), chalk.white(message));
 
   logDetails(details, "  ");

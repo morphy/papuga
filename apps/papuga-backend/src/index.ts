@@ -1,39 +1,67 @@
+import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
+import { createClient } from "redis";
+import { decodeJwt } from "jose";
 
 import { logError, logInfo, logSuccess } from "@pck/utils";
 
 import { RegisterRoutes } from "./tsoa/routes";
 import { AppDataSource } from "./data-source";
 
-import errorHandler from "./errorHandler";
-import notFoundHandler from "./notFoundHandler";
+import errorHandler from "misc/errorHandler";
+import notFoundHandler from "misc/notFoundHandler";
+import authHandler from "misc/authHandler";
 
-logInfo("Papuga backend server started");
-logInfo("Initializing datasource");
+import corsConfig from "misc/corsConfig";
 
-AppDataSource.initialize()
-  .then(() => {
-    logInfo("Initializing express");
+const start = async () => {
+  logInfo("Papuga backend server started");
 
-    const app = express();
+  logInfo("Initializing datasource");
+  await AppDataSource.initialize();
 
-    app.use(helmet());
-    app.use(cors());
-    app.use(express.json());
+  logInfo("Initializing redis client");
+  const redisClient = createClient();
 
-    logInfo("Registering controllers");
+  logInfo("Connecting to redis instance");
+  await redisClient.connect();
 
-    RegisterRoutes(app);
+  logInfo("Initializing express");
+  const app = express();
 
-    app.use(notFoundHandler);
-    app.use(errorHandler);
+  app.use(cors(corsConfig));
+  app.use(helmet());
+  app.use(express.json());
+  app.use(authHandler(redisClient));
 
-    app.listen(4000, () => {
-      logSuccess("Server listening on port 4000");
+  app.get("/status", async (req, res) => {
+    const idToken = req.oidc.idToken;
+    const accessToken = req.oidc.accessToken?.access_token;
+
+    res.json({
+      acc_exp: req.oidc.accessToken?.isExpired(),
+      is_authorized: req.oidc.isAuthenticated(),
+      id_token: idToken ? decodeJwt(idToken) : "",
+      access_token: accessToken ? decodeJwt(accessToken) : ""
     });
-  })
-  .catch((error) => {
-    logError("Error during datasource initialization", error);
   });
+
+  app.get("/", (_req, res) => res.redirect("http://localhost:3000"));
+
+  logInfo("Registering controllers");
+
+  RegisterRoutes(app);
+
+  logInfo("Registering error handlers");
+
+  app.use(notFoundHandler);
+  app.use(errorHandler);
+
+  app.listen(4000, () => {
+    logSuccess("Server listening on port 4000");
+  });
+};
+
+start().catch((error) => logError("Error during server startup", error));

@@ -8,25 +8,162 @@
 		"schemas": {
 			"Item": {
 				"properties": {
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"deletedAt": {
+						"type": "string",
+						"format": "date-time"
+					},
 					"id": {
 						"type": "number",
 						"format": "double"
 					},
-					"name": {
-						"type": "string"
-					},
 					"code": {
 						"type": "string"
 					},
-					"image": {
+					"name": {
+						"type": "string"
+					},
+					"value": {
+						"type": "number",
+						"format": "double"
+					},
+					"serialNumber": {
+						"type": "string"
+					},
+					"productionDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"expirationDate": {
+						"type": "string",
+						"format": "date-time"
+					}
+				},
+				"required": [
+					"createdAt",
+					"updatedAt",
+					"id",
+					"code"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreateItem": {
+				"properties": {
+					"code": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"value": {
+						"type": "number",
+						"format": "double"
+					},
+					"serialNumber": {
+						"type": "string"
+					},
+					"productionDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"expirationDate": {
+						"type": "string",
+						"format": "date-time"
+					}
+				},
+				"required": [
+					"code"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CodeAvailability": {
+				"properties": {
+					"available": {
+						"type": "boolean"
+					}
+				},
+				"required": [
+					"available"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UpdateItem": {
+				"properties": {
+					"code": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"value": {
+						"type": "number",
+						"format": "double"
+					},
+					"serialNumber": {
+						"type": "string"
+					},
+					"productionDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"expirationDate": {
+						"type": "string",
+						"format": "date-time"
+					}
+				},
+				"type": "object",
+				"additionalProperties": false
+			},
+			"User": {
+				"properties": {
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"id": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"createdTimestamp": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"enabled": {
+						"type": "boolean"
+					},
+					"avatar": {
+						"type": "string"
+					},
+					"firstName": {
+						"type": "string"
+					},
+					"lastName": {
 						"type": "string"
 					}
 				},
 				"required": [
+					"createdAt",
+					"updatedAt",
 					"id",
-					"name",
-					"code",
-					"image"
+					"email",
+					"createdTimestamp",
+					"enabled"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -42,6 +179,127 @@
 	},
 	"openapi": "3.0.0",
 	"paths": {
+		"/items": {
+			"post": {
+				"operationId": "CreateItem",
+				"responses": {
+					"201": {
+						"description": "Created",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Item"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"details": {
+											"type": "string"
+										},
+										"code": {
+											"type": "number",
+											"enum": [
+												422
+											],
+											"nullable": false
+										}
+									},
+									"required": [
+										"details",
+										"code"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Item"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateItem"
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"operationId": "GetItems",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/Item"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Item"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "withDeleted",
+						"required": false,
+						"schema": {
+							"default": false
+						}
+					}
+				]
+			}
+		},
+		"/items/codeAvailability": {
+			"get": {
+				"operationId": "GetCodeAvailability",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CodeAvailability"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Item"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "code",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
 		"/items/{id}": {
 			"get": {
 				"operationId": "GetItem",
@@ -55,8 +313,150 @@
 								}
 							}
 						}
+					},
+					"422": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"details": {
+											"type": "string"
+										},
+										"code": {
+											"type": "number",
+											"enum": [
+												422
+											],
+											"nullable": false
+										}
+									},
+									"required": [
+										"details",
+										"code"
+									],
+									"type": "object"
+								}
+							}
+						}
 					}
 				},
+				"tags": [
+					"Item"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			},
+			"patch": {
+				"operationId": "UpdateItem",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					},
+					"422": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"details": {
+											"type": "string"
+										},
+										"code": {
+											"type": "number",
+											"enum": [
+												422
+											],
+											"nullable": false
+										}
+									},
+									"required": [
+										"details",
+										"code"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Item"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateItem"
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"operationId": "DeleteItem",
+				"responses": {
+					"204": {
+						"description": "No content"
+					},
+					"422": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"details": {
+											"type": "string"
+										},
+										"code": {
+											"type": "number",
+											"enum": [
+												422
+											],
+											"nullable": false
+										}
+									},
+									"required": [
+										"details",
+										"code"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Item"
+				],
 				"security": [],
 				"parameters": [
 					{
@@ -70,8 +470,178 @@
 					},
 					{
 						"in": "query",
-						"name": "name",
+						"name": "hard",
 						"required": false,
+						"schema": {
+							"default": false,
+							"type": "boolean"
+						}
+					}
+				]
+			},
+			"put": {
+				"operationId": "RestoreItem",
+				"responses": {
+					"204": {
+						"description": "No content"
+					},
+					"422": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"details": {
+											"type": "string"
+										},
+										"code": {
+											"type": "number",
+											"enum": [
+												422
+											],
+											"nullable": false
+										}
+									},
+									"required": [
+										"details",
+										"code"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Item"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
+		"/users/userInfo": {
+			"get": {
+				"operationId": "GetUserInfo",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					}
+				},
+				"tags": [
+					"User"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/users/syncWithIDP": {
+			"post": {
+				"operationId": "SyncWithIDP",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					}
+				},
+				"tags": [
+					"User"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/users": {
+			"get": {
+				"operationId": "GetUsers",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/User"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"User"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/users/{id}": {
+			"get": {
+				"operationId": "GetUser",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					},
+					"422": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"details": {
+											"type": "string"
+										},
+										"code": {
+											"type": "number",
+											"enum": [
+												422
+											],
+											"nullable": false
+										}
+									},
+									"required": [
+										"details",
+										"code"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"User"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
 						"schema": {
 							"type": "string"
 						}

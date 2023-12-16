@@ -1,5 +1,5 @@
 {
-  "name": "papuga",
+  "name": "pck",
   "version": "0.1.0",
   "description": "Storage and resource management app for POO PCK Gdańsk",
   "license": "GPL-3.0-only",
@@ -13,13 +13,13 @@
   "scripts": {
     "prettier": "npx prettier --check ./",
     "prettier:fix": "npx prettier --write ./",
-    "clean": "rimraf --glob \"modules/**/dist\" \"modules/**/*.tsbuildinfo\" \"apps/**/dist\" \"apps/**/*.tsbuildinfo\"",
+    "clean": "rimraf --glob \"modules/**/dist\" \"modules/**/*.tsbuildinfo\" \"apps/**/dist\" \"apps/**/*.tsbuildinfo\" \"types/**/dist\" \"types/**/*.tsbuildinfo\"",
     "clean:all": "npm run clean && rimraf --glob \"**/node_modules\"",
     "build": "tsc --build --force"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/morphy/papuga.git"
+    "url": "git+https://github.com/morphy/pck.git"
   },
   "dependencies": {
     "prettier": "^2.8.7",

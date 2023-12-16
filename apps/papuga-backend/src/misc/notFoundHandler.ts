@@ -1,10 +1,13 @@
 import { RequestHandler } from "express";
-import { ReasonPhrases, StatusCodes } from "http-status-codes";
+import { StatusCodes } from "http-status-codes";
+import getErrorResponse from "misc/getErrorResponse";
 
 const notFoundHandler: RequestHandler = (_req, res) => {
-  res.status(StatusCodes.NOT_FOUND).json({
-    message: ReasonPhrases.NOT_FOUND
-  });
+  return getErrorResponse(
+    res,
+    StatusCodes.NOT_FOUND,
+    "The requested route could not be found"
+  );
 };
 
 export default notFoundHandler;

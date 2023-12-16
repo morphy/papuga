@@ -28,5 +28,5 @@
       "path": "../../types/papuga-types"
     }
   ],
-  "include": ["src/**/*"]
+  "include": ["src/**/*.ts", "src/**/*.json"]
 }

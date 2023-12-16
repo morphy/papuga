@@ -4,6 +4,7 @@ import cors from "cors";
 import helmet from "helmet";
 import { createClient } from "redis";
 import { decodeJwt } from "jose";
+import { generateHTML, serve } from "swagger-ui-express";
 
 import { logError, logInfo, logSuccess } from "@pck/utils";
 
@@ -15,6 +16,7 @@ import notFoundHandler from "misc/notFoundHandler";
 import authHandler from "misc/authHandler";
 
 import corsConfig from "misc/corsConfig";
+import scheduleCronTasks from "./cron/scheduleCronTasks";
 
 const start = async () => {
   logInfo("Papuga backend server started");
@@ -28,15 +30,20 @@ const start = async () => {
   logInfo("Connecting to redis instance");
   await redisClient.connect();
 
+  logInfo("Scheduling cron tasks");
+
+  scheduleCronTasks();
+
   logInfo("Initializing express");
   const app = express();
 
   app.use(cors(corsConfig));
   app.use(helmet());
+  app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
   app.use(authHandler(redisClient));
 
-  app.get("/status", async (req, res) => {
+  app.get("/", async (req, res) => {
     const idToken = req.oidc.idToken;
     const accessToken = req.oidc.accessToken?.access_token;
 
@@ -48,7 +55,13 @@ const start = async () => {
     });
   });
 
-  app.get("/", (_req, res) => res.redirect("http://localhost:3000"));
+  app.use(
+    "/docs",
+    serve,
+    async (req: express.Request, res: express.Response) => {
+      return res.send(generateHTML(await import("./tsoa/swagger.json")));
+    }
+  );
 
   logInfo("Registering controllers");
 

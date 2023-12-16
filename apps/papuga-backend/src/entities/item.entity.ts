@@ -14,11 +14,8 @@ export class ItemEntity implements Item {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ unique: true })
   code: string;
-
-  @DeleteDateColumn()
-  deletedAt: Date;
 
   @Column({ nullable: true })
   name?: string;
@@ -34,6 +31,9 @@ export class ItemEntity implements Item {
 
   @Column({ nullable: true })
   expirationDate?: Date;
+
+  @DeleteDateColumn()
+  deletedAt?: Date;
 
   @CreateDateColumn()
   createdAt: Date;

@@ -1,18 +1,23 @@
 {
   "compilerOptions": {
-    "incremental": true,
-    "target": "es2019",
     "module": "commonjs",
-    "declaration": true,
-    "sourceMap": true,
-    "composite": true,
-    "strict": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
+    "target": "ES2021",
+    "sourceMap": true,
+    "declaration": true,
+
+    "incremental": true,
     "skipLibCheck": true,
+    "removeComments": true,
+
+    "composite": true,
+    "strict": true,
+
     "forceConsistentCasingInFileNames": true,
     "strictPropertyInitialization": false,
     "noImplicitAny": true,
+    "noFallthroughCasesInSwitch": true,
     "resolveJsonModule": true
   },
   "exclude": ["node_modules"],

@@ -1,32 +1,15 @@
 {
   "extends": "../../tsconfig.common.json",
   "compilerOptions": {
-    "outDir": "dist",
-    "baseUrl": "./src",
-    "rootDir": "./src",
-
-    "plugins": [{ "transform": "typescript-transform-paths" }],
-
-    "paths": {
-      "controllers/*": ["controllers/*"],
-      "models/*": ["models/*"],
-      "misc/*": ["misc/*"],
-      "routes/*": ["routes/*"],
-      "schemas/*": ["schemas/*"],
-      "services/*": ["services/*"],
-      "entities/*": ["entities/*"],
-      "repositories/*": ["repositories/*"]
-    },
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
-  },
-  "references": [
-    {
-      "path": "../../modules/utils"
-    },
-    {
-      "path": "../../types/papuga-types"
-    }
-  ],
-  "include": ["src/**/*.ts", "src/**/*.json"]
+    "allowSyntheticDefaultImports": true,
+    "strictNullChecks": false,
+    "strictBindCallApply": false,
+    "noFallthroughCasesInSwitch": true,
+
+    "outDir": "./dist",
+    "baseUrl": "./src"
+  }
 }

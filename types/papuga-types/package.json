@@ -1,5 +1,5 @@
 {
-  "name": "@pck/papuga-types",
+  "name": "@grs/papuga-types",
   "version": "0.0.1",
   "description": "Types for papuga",
   "main": "dist/index.js",

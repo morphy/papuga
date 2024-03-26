@@ -1,5 +1,5 @@
 {
-  "name": "@pck/utils",
+  "name": "@grs/utils",
   "version": "0.0.1",
   "description": "Helper functions package",
   "main": "dist/index.js",

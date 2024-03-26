@@ -1,25 +1,15 @@
 {
-  "name": "pck",
+  "name": "grs",
   "version": "0.1.0",
-  "description": "Storage and resource management app for POO PCK Gdańsk",
+  "description": "Resource management app for GRS PCK Gdańsk",
   "license": "GPL-3.0-only",
   "private": true,
-  "contributors": [
-    {
-      "name": "morphy",
-      "url": "https://github.com/morphy"
-    }
-  ],
   "scripts": {
     "prettier": "npx prettier --check ./",
     "prettier:fix": "npx prettier --write ./",
     "clean": "rimraf --glob \"modules/**/dist\" \"modules/**/*.tsbuildinfo\" \"apps/**/dist\" \"apps/**/*.tsbuildinfo\" \"types/**/dist\" \"types/**/*.tsbuildinfo\"",
-    "clean:all": "npm run clean && rimraf --glob \"**/node_modules\"",
+    "clean:with-node-modules": "npm run clean && rimraf --glob \"**/node_modules\"",
     "build": "tsc --build --force"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/morphy/pck.git"
   },
   "dependencies": {
     "prettier": "^2.8.7",
@@ -29,5 +19,15 @@
     "apps/*",
     "modules/*",
     "types/*"
-  ]
+  ],
+  "contributors": [
+    {
+      "name": "morphy",
+      "url": "https://github.com/morphy"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/morphy/pck.git"
+  }
 }
